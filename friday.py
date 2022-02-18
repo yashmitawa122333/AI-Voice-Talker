@@ -27,7 +27,7 @@ def wishme():
     else:
         speak('Good Evening !')
 
-    speak("I am Friday . how can i help you !")
+    speak("I am Friday . verification start")
 
 def takecommand():
 
@@ -46,51 +46,46 @@ def takecommand():
     except Exception as e:
         # print(e)
         print("say that again...\n")
-
-        return "None"
+        # return "None"
     return query
-
-def face():
-    name = face_classifier.face_classifier()
-    return name
 
 if __name__ == "__main__":
     wishme()
     while True:
-        speak("First we have to verify you. give you password")
-        # passw = takecommand().lower()
-        name = face()
+        # speak("Face verification")
+        name = face_classifier.face_classifier()
         if "yash" == name:
+            speak('Face verification complete')
             while True:
-                query = takecommand().lower()
-                if 'wikipedia' in query:
-                    query = query.replace('wikipedia','')
-                    result = wikipedia.summary(query, sentences=2)
+                command = takecommand().lower()
+                if 'wikipedia' in command:
+                    command = command.replace('wikipedia','')
+                    result = wikipedia.summary(command, sentences=2)
                     print(result)
                     speak(result)
 
-                elif 'open youtube' in query:
+                elif 'open youtube' in command:
                     webbrowser.open('youtube.com')
 
-                elif 'open stackoverflow' in query:
+                elif 'open stackoverflow' in command:
                     webbrowser.open('stackoverflow.com')
 
-                elif 'open google' in query:
+                elif 'open google' in command:
                     webbrowser.open('google.com')
 
-                elif 'play music' in query:
+                elif 'play music' in command:
                     play_music.play_audio_songs()
 
-                elif 'play video' in query:
+                elif 'play video' in command:
                     play_music.play_video_songs()
 
-                elif 'the time' in query:
+                elif 'the time' in command:
                     strTime = datetime.datetime.now().strftime("%H:%M:%S")
                     speak(f'The time is {strTime}')
 
-                elif 'exit' or 'quite' in query:
+                elif 'exit' in command:
                     sys.exit()
                 
         else:
-            speak("Sorry i can't confirm you")
+            speak("Face recognition fail, re-try verification")
  

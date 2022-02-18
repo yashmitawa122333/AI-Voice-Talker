@@ -29,15 +29,15 @@ def face_classifier():
             roi_color = frame[y:y+h, x:x+w]
 
             id_, conf = recognizer.predict(roi_gray)
-            if conf>= 15: # and conf<=55:
+            if conf>= 5: # and conf<=55:
                 # print(id_)
                 # print(labels[id_])
                 ret = labels[id_]
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 name = labels[id_]
-                color = (255,255,255)
+                color = (200,215,2)
                 stroke = 2
-                cv2.putText(frame, name, (x,y), font, 1, stroke , cv2.LINE_AA)
+                cv2.putText(frame, name, (x,y), font,1, color, stroke, cv2.LINE_AA)
 
             # img_item = 'my_image.png'
             # cv2.imwrite(img_item, roi_gray)
@@ -49,9 +49,9 @@ def face_classifier():
             cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
 
         cv2.imshow('frame', frame)
-        if cv2.waitKey(20) & 0xFF == ord('q'):
+        if cv2.waitKey(2) & 0xFF == ord('q'):
             break
 
-    cap.release()
-    cap.destroyAllWindows()
+    # cv2.release()
+    cv2.destroyAllWindows()
     return ret
