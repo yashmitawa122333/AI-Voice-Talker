@@ -5,6 +5,8 @@ import speech_recognition as sr
 import wikipedia
 import sys
 import play_music 
+import face_classifier
+import time
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -48,12 +50,17 @@ def takecommand():
         return "None"
     return query
 
+def face():
+    name = face_classifier.face_classifier()
+    return name
+
 if __name__ == "__main__":
     wishme()
     while True:
         speak("First we have to verify you. give you password")
-        passw = takecommand().lower()
-        if "it's me" == passw:
+        # passw = takecommand().lower()
+        name = face()
+        if "yash" == name:
             while True:
                 query = takecommand().lower()
                 if 'wikipedia' in query:
@@ -71,10 +78,10 @@ if __name__ == "__main__":
                 elif 'open google' in query:
                     webbrowser.open('google.com')
 
-                elif 'play music' or 'play mp4 songs' or 'play audio songs' in query:
+                elif 'play music' in query:
                     play_music.play_audio_songs()
 
-                elif 'play video' or 'play mp4 songs' or 'play video songs' in query:
+                elif 'play video' in query:
                     play_music.play_video_songs()
 
                 elif 'the time' in query:
@@ -83,6 +90,7 @@ if __name__ == "__main__":
 
                 elif 'exit' or 'quite' in query:
                     sys.exit()
-
+                
         else:
             speak("Sorry i can't confirm you")
+ 
