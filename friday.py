@@ -138,6 +138,9 @@ if __name__ == "__main__":
  
                 elif 'exit' in command:
                     sys.exit(0)
+
+                else:
+                    speak("Command is not in my database")
                 
         else:
             speak("Face recognition fail, re-try verification")
